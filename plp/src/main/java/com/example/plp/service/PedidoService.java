@@ -10,6 +10,8 @@ import com.example.plp.repository.PedidoRepository;
 import com.example.plp.repository.ProdutoRepository;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -40,6 +42,9 @@ public class PedidoService {
 
         return new ListarPedido(pedido.getId(), pedido.getFuncionario().getId(),
                 pedido.getCliente().getNome());
+    }
 
+    public Page<ListarPedido> listarPedidos(Pageable pageable) {
+        return repository.findAll(pageable).map(ListarPedido::new);
     }
 }
