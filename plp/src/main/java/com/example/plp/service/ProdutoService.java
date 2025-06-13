@@ -2,6 +2,7 @@ package com.example.plp.service;
 
 
 import com.example.plp.dto.Mensagem;
+import com.example.plp.dto.pedido.ListarPedidos;
 import com.example.plp.dto.prod.*;
 import com.example.plp.model.Produto;
 import com.example.plp.repository.ProdutoRepository;
@@ -36,7 +37,8 @@ public class ProdutoService {
     }
 
     public Page<ListarProduto> paginacao(Pageable pageable) {
-       return repository.findAll(pageable).map(ListarProduto::new);
+       return repository.findAll(pageable).map(p -> new ListarProduto(p.getNome(),p.getIdProduto(), p.getDescricao(),
+               p.getQuantidade(), p.getPreco()));
     }
 
     public void deletar(Long id) {

@@ -1,9 +1,7 @@
 package com.example.plp.controller;
 
-import com.example.plp.dto.pedido.ListarPedido;
-import com.example.plp.dto.pedido.PedidoDto;
+import com.example.plp.dto.pedido.ListarPedidos;
 import com.example.plp.service.PedidoService;
-import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -21,7 +19,7 @@ public class PedidoController {
 
 
     @GetMapping("/listar")
-    public ResponseEntity<Page<ListarPedido>> listar(@PageableDefault(size = 5) Pageable pageable){
+    public ResponseEntity<Page<ListarPedidos>> listar(@PageableDefault(size = 5) Pageable pageable){
         var page =  pedidoService.listarPedidos(pageable);
 
         return ResponseEntity.ok(page);

@@ -1,15 +1,13 @@
 package com.example.plp.service;
 
 
+import com.example.plp.dto.itensDto.ItensDtoReturn;
 import com.example.plp.dto.itensDto.PostItem;
-import com.example.plp.dto.pedido.ListarPedido;
-import com.example.plp.dto.pedido.PedidoDto;
-import com.example.plp.model.Itens;
+import com.example.plp.dto.pedido.ListarPedidos;
 import com.example.plp.model.Pedido;
 import com.example.plp.repository.ClienteRepository;
 import com.example.plp.repository.FuncionarioRepository;
 import com.example.plp.repository.PedidoRepository;
-import com.example.plp.repository.ProdutoRepository;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -17,6 +15,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
+import java.util.stream.Collectors;
 
 @Service
 public class PedidoService {
@@ -31,9 +30,23 @@ public class PedidoService {
     private FuncionarioRepository funcionarioRepository;
 
 
-    public Page<ListarPedido> listarPedidos(Pageable pageable) {
-        return repository.findAll(pageable).map(ListarPedido::new);
+    public Page<ListarPedidos> listarPedidos(Pageable pageable) {
+        return repository.findAll(pageable).map(p -> new ListarPedidos(
+                p.getId(),
+                p.getFuncionario().getId(),
+                p.getFuncionario().getNome(),
+                p.getCliente().getNome(),
+                p.getItens().stream()
+                        .map(i -> new ItensDtoReturn(
+                                i.getQuantidade(),
+                                i.getProdutos().getNome(),
+                                i.getProdutos().getDescricao(),
+                                i.getProdutos().getPreco()))
+                        .collect(Collectors.toList())
+        ));
     }
+
+
 
     public Pedido cadastrarPedido(@Valid PostItem itens) {
         var pedido = new Pedido();

@@ -12,9 +12,7 @@ public record PedidoDto(
 ) {
 
 
-//    public PedidoDto(Pedido pedido){
-//        this(pedido.getFuncionario().getId(), pedido.getCliente().getId(), pedido.getItens());
-//    }
+
 
 }
 
