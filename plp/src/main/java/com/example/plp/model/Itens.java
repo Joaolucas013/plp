@@ -4,11 +4,8 @@ import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 
-import java.util.ArrayList;
-import java.util.List;
-
 @Entity
-@Table( name = "itens")
+@Table(name = "itens")
 @AllArgsConstructor
 @NoArgsConstructor
 public class Itens {
@@ -27,6 +24,7 @@ public class Itens {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "pedido_id")
     private Pedido pedido;
+
 
 
     public Integer getQuantidade() {

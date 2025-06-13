@@ -24,27 +24,31 @@ public class ItensService {
     private PedidoRepository pedidoRepository;
 
     @Autowired
+    private PedidoService pedidoService;
+
+    @Autowired
     private ProdutoRepository produtoRepository;
 
 
     public ItensDoPedido cadastrar(@Valid PostItem itens) {
         var item = new Itens();
-        var pedido = pedidoRepository.findById(itens.pedidoId()).get();
-        var produto = produtoRepository.findById(itens.produtoId()).get();
+        var pedido = pedidoService.cadastrarPedido(itens);
 
+        var produto = produtoRepository.findById(itens.produtoId()).get();
         if(produto.getQuantidade() - itens.quantidade() < 0){
             throw new RuntimeException("Não há " + itens.quantidade() + " produtos  disponíveis!!!");
         }
 
         produto.setQuantidade(produto.getQuantidade() - itens.quantidade());
         produtoRepository.save(produto);
+        pedidoRepository.save(pedido);
 
         item.setPedido(pedido);
         item.setProdutos(produto);
         item.setQuantidade(itens.quantidade());
         repository.save(item);
 
-        return new ItensDoPedido(item.getIdItem(),item.getQuantidade(), item.getProdutos().getIdProduto(),
+        return new ItensDoPedido(item.getIdItem(), item.getQuantidade(), item.getProdutos().getIdProduto(),
                 item.getPedido().getId());
     }
 

@@ -9,12 +9,12 @@ import java.util.List;
 public record ListarPedido(
         Long idPedido,
         Long idFuncionario,
-        String  nomeCliente
-       // List<Itens> itens
+        String  nomeCliente,
+        List<Itens> itens
 ) {
 
     public ListarPedido(Pedido pedido){
-        this(pedido.getId(), pedido.getFuncionario().getId(), pedido.getCliente().getNome());
+        this(pedido.getId(), pedido.getFuncionario().getId(), pedido.getCliente().getNome(), pedido.getItens());
     }
 
 }

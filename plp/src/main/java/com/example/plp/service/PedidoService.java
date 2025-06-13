@@ -1,8 +1,10 @@
 package com.example.plp.service;
 
 
+import com.example.plp.dto.itensDto.PostItem;
 import com.example.plp.dto.pedido.ListarPedido;
 import com.example.plp.dto.pedido.PedidoDto;
+import com.example.plp.model.Itens;
 import com.example.plp.model.Pedido;
 import com.example.plp.repository.ClienteRepository;
 import com.example.plp.repository.FuncionarioRepository;
@@ -14,6 +16,8 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
+
 @Service
 public class PedidoService {
 
@@ -23,28 +27,22 @@ public class PedidoService {
     @Autowired
     private ClienteRepository clienteRepository;
 
-//    @Autowired
-//    private ProdutoRepository produtoRepository;
-
     @Autowired
     private FuncionarioRepository funcionarioRepository;
 
 
-    public ListarPedido cadastrar(PedidoDto pedidoDto) {
-        var pedido = new Pedido();
-
-        var func =  funcionarioRepository.findById(pedidoDto.idFuncionario()).orElseThrow();
-        var cliente = clienteRepository.findById(pedidoDto.idCliente()).orElseThrow();
-
-        pedido.setCliente(cliente);
-        pedido.setFuncionario(func);
-        repository.save(pedido);
-
-        return new ListarPedido(pedido.getId(), pedido.getFuncionario().getId(),
-                pedido.getCliente().getNome());
-    }
-
     public Page<ListarPedido> listarPedidos(Pageable pageable) {
         return repository.findAll(pageable).map(ListarPedido::new);
+    }
+
+    public Pedido cadastrarPedido(@Valid PostItem itens) {
+        var pedido = new Pedido();
+
+        var func =  funcionarioRepository.findById(itens.idFuncionario()).orElseThrow();
+        var cliente = clienteRepository.findById(itens.idCliente()).orElseThrow();
+        pedido.setCliente(cliente);
+        pedido.setFuncionario(func);
+        pedido.setHoraPedido(LocalDateTime.now());
+        return pedido;
     }
 }

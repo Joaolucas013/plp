@@ -19,12 +19,6 @@ public class PedidoController {
     @Autowired
     private PedidoService pedidoService;
 
-    @PostMapping("/realizar")
-    public ResponseEntity<ListarPedido> fazerPedido(@RequestBody @Valid PedidoDto pedidoDto){
-        var pedido = pedidoService.cadastrar(pedidoDto);
-
-        return ResponseEntity.ok(pedido);
-    }
 
     @GetMapping("/listar")
     public ResponseEntity<Page<ListarPedido>> listar(@PageableDefault(size = 20) Pageable pageable){
