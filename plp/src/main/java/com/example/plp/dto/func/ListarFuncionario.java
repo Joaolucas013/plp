@@ -10,13 +10,12 @@ public record ListarFuncionario(
         String nome,
         String cpf,
         LocalDate dataAdmissao,
-        LocalDate dataDemissao,
         double salario
 ) {
 
     public ListarFuncionario(Funcionario funcionario){
         this(funcionario.getId(), funcionario.getNome(), funcionario.getCpf(), funcionario.getDataAdmissao(),
-                funcionario.getDataDemissao(), funcionario.getSalario());
+                funcionario.getSalario());
     }
 
 

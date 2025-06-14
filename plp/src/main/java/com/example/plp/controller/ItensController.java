@@ -23,7 +23,6 @@ public class ItensController {
     @PostMapping("post")
     public ResponseEntity<ItensDoPedido> cadastrarPedido(@Valid @RequestBody PostItem itens){
         var item = service.cadastrar(itens);
-
         return ResponseEntity.ok(item);
     }
 

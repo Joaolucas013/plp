@@ -29,7 +29,7 @@ public class FuncionarioController {
 
     @GetMapping("read")
     public ResponseEntity<Page<ListarFuncionario>> listar(@PageableDefault(size = 5, sort = {"nome"}) Pageable pageable) {
-        var page = funcionarioService.paginar(pageable);
+        var page = funcionarioService.listarFuncionariosAtuais(pageable);
         return ResponseEntity.ok(page);
 
     }

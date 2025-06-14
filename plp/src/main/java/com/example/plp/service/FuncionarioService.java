@@ -11,6 +11,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -26,17 +27,21 @@ public class FuncionarioService {
         funcionario.setNome(dto.nome());
         funcionario.setDataAdmissao(dto.dataAdmissao());
         funcionario.setSalario(dto.salario());
+        funcionario.setAtivo(true);
 
         var salvo = funcionarioRepository.save(funcionario);
         return new ListarFuncionario(salvo.getId(), salvo.getNome(), salvo.getCpf(),
-                salvo.getDataAdmissao(), salvo.getDataDemissao(), salvo.getSalario());
+                salvo.getDataAdmissao(), salvo.getSalario());
 
     }
 
-    public Page<ListarFuncionario> paginar(Pageable pageable) {
-        var page = funcionarioRepository.findAll(pageable)
-                .map(ListarFuncionario::new);
-        return page;
+
+    public Page<ListarFuncionario>  listarFuncionariosAtuais(Pageable pageable) {
+        return funcionarioRepository.findAllByAtivoTrue(pageable)
+                .map(f -> new ListarFuncionario(f.id(), f.nome(), f.cpf(),
+                        f.dataAdmissao(),f.salario()));
+
+
     }
 
     public ListarFuncionario update(@Valid UpdateFuncionario dto) {
@@ -46,9 +51,14 @@ public class FuncionarioService {
         funcionarioRepository.save(funcionario);
 
         return new ListarFuncionario(funcionario.getId(), funcionario.getNome(), funcionario.getCpf(),
-                funcionario.getDataAdmissao(), funcionario.getDataDemissao(), funcionario.getSalario());
+                funcionario.getDataAdmissao(), funcionario.getSalario());
     }
 
+//    Long id,
+//        String nome,
+//        String cpf,
+//        LocalDate dataAdmissao,
+//        double salario
     public void delete(Long id) {
         Optional<Funcionario> funExist = funcionarioRepository.findById(id);
 

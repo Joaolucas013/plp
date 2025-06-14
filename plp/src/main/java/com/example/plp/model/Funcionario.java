@@ -32,6 +32,11 @@ public class Funcionario {
     @Column
     private double salario;
 
+    @Column
+    private boolean ativo;
+
+
+
     @OneToMany(mappedBy = "funcionario")
     private List<Pedido> pedido;
 
@@ -108,5 +113,13 @@ public class Funcionario {
             funcionario.setSalario(dto.salario());
         }
         return  funcionario;
+    }
+
+    public boolean isAtivo() {
+        return ativo;
+    }
+
+    public void setAtivo(boolean ativo) {
+        this.ativo = ativo;
     }
 }
