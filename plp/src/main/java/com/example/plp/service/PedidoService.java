@@ -30,6 +30,17 @@ public class PedidoService {
     private FuncionarioRepository funcionarioRepository;
 
 
+    public Pedido cadastrarPedido(@Valid PostItem itens) {
+        var pedido = new Pedido();
+
+        var func =  funcionarioRepository.findById(itens.idFuncionario()).orElseThrow();
+        var cliente = clienteRepository.findById(itens.idCliente()).orElseThrow();
+        pedido.setCliente(cliente);
+        pedido.setFuncionario(func);
+        pedido.setHoraPedido(LocalDateTime.now());
+        return pedido;
+    }
+
     public Page<ListarPedidos> listarPedidos(Pageable pageable) {
         return repository.findAll(pageable).map(p -> new ListarPedidos(
                 p.getId(),
@@ -48,14 +59,5 @@ public class PedidoService {
 
 
 
-    public Pedido cadastrarPedido(@Valid PostItem itens) {
-        var pedido = new Pedido();
 
-        var func =  funcionarioRepository.findById(itens.idFuncionario()).orElseThrow();
-        var cliente = clienteRepository.findById(itens.idCliente()).orElseThrow();
-        pedido.setCliente(cliente);
-        pedido.setFuncionario(func);
-        pedido.setHoraPedido(LocalDateTime.now());
-        return pedido;
-    }
 }

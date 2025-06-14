@@ -61,7 +61,7 @@ public class ClienteService {
         Optional<Cliente> delete = repository.findById(id);
 
         if (!delete.isPresent()) {
-            throw new RuntimeException("idCliente não encontrado!");
+            throw new RuntimeException("id do Cliente não encontrado!");
         }
         repository.deleteById(delete.get().getId());
     }

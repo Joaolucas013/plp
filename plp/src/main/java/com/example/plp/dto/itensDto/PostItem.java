@@ -7,7 +7,6 @@ import java.util.List;
 public record PostItem(
         int quantidade,
         Long produtoId,
-//        Long pedidoId,
         Long idFuncionario,
         Long idCliente
 ) {

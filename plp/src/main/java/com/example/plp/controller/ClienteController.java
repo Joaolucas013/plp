@@ -20,6 +20,7 @@ import java.util.Set;
 @RequestMapping("clientes")
 public class ClienteController {
 
+
     @Autowired
     private ClienteService clienteService;
 
@@ -49,7 +50,6 @@ public class ClienteController {
 
     @GetMapping("buscar/{nome}")
     public ResponseEntity<List<UpdateCliente>> buscarClientePorNome(@PathVariable String nome) {
-
         var cliente = clienteService.buscar(nome);
         return ResponseEntity.ok(cliente);
 

@@ -21,7 +21,6 @@ public class PedidoController {
     @GetMapping("/listar")
     public ResponseEntity<Page<ListarPedidos>> listar(@PageableDefault(size = 5) Pageable pageable){
         var page =  pedidoService.listarPedidos(pageable);
-
         return ResponseEntity.ok(page);
     }
 
