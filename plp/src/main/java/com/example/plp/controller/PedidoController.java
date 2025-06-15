@@ -1,7 +1,7 @@
 package com.example.plp.controller;
 
+import com.example.plp.dados.DadosCompras;
 import com.example.plp.dto.pedido.ListarPedidos;
-import com.example.plp.dto.pedido.PedidoDto;
 import com.example.plp.dto.pedido.PedidoItens;
 import com.example.plp.dto.pedido.PedidosReturn;
 import com.example.plp.service.PedidoService;
@@ -34,6 +34,13 @@ public class PedidoController {
     public ResponseEntity<Page<ListarPedidos>> listar(@PageableDefault(size = 5) Pageable pageable){
         var page =  pedidoService.listarPedidos(pageable);
         return ResponseEntity.ok(page);
+    }
+
+    @GetMapping("cliente_fiel")
+    public ResponseEntity<DadosCompras> dados(){
+        var cliente = pedidoService.clienteFiel();
+
+        return ResponseEntity.ok(cliente);
     }
 
 }

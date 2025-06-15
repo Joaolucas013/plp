@@ -1,5 +1,6 @@
 package com.example.plp.service;
 
+import com.example.plp.dados.FuncionarioFiel;
 import com.example.plp.dto.func.FuncionarioDto;
 import com.example.plp.dto.func.ListarFuncionario;
 import com.example.plp.dto.func.UpdateFuncionario;
@@ -61,5 +62,9 @@ public class FuncionarioService {
             throw new RuntimeException("Funcionário não existe no nosso banco de dados!");
         }
         funcionarioRepository.deleteById(funExist.get().getId());
+    }
+
+    public FuncionarioFiel fiel() {
+        return funcionarioRepository.vendas();
     }
 }

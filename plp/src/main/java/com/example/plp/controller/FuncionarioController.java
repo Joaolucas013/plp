@@ -1,5 +1,6 @@
 package com.example.plp.controller;
 
+import com.example.plp.dados.FuncionarioFiel;
 import com.example.plp.dto.func.FuncionarioDto;
 import com.example.plp.dto.func.ListarFuncionario;
 import com.example.plp.dto.func.UpdateFuncionario;
@@ -44,6 +45,13 @@ public class FuncionarioController {
         funcionarioService.delete(id);
 
         return ResponseEntity.ok("Funcionario " + id + " deletado com sucesso!!!");
+    }
+
+    @GetMapping("/funcionario_venda")
+    public ResponseEntity<FuncionarioFiel> fielResponseEntity() {
+        var fun = funcionarioService.fiel();
+
+        return ResponseEntity.ok(fun);
     }
 
 }

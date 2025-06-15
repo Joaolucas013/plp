@@ -1,11 +1,11 @@
 package com.example.plp.service;
 
 
+import com.example.plp.dados.DadosCompras;
 import com.example.plp.dto.itensDto.ItensDtoReturn;
 import com.example.plp.dto.pedido.PedidoItens;
 import com.example.plp.dto.pedido.ListarPedidos;
 import com.example.plp.dto.pedido.PedidosReturn;
-import com.example.plp.model.Itens;
 import com.example.plp.model.Pedido;
 import com.example.plp.repository.*;
 import jakarta.validation.Valid;
@@ -87,6 +87,7 @@ public class PedidoService {
     }
 
 
-
-
+    public DadosCompras clienteFiel() {
+        return repository.dados();
+    }
 }
