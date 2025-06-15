@@ -20,12 +20,6 @@ public class ItensController {
     @Autowired
     private ItensService service;
 
-    @PostMapping("post")
-    public ResponseEntity<ItensDoPedido> cadastrarPedido(@Valid @RequestBody PedidoItens itens){
-        var item = service.cadastrar(itens);
-        return ResponseEntity.ok(item);
-    }
-
 
     @GetMapping("/listar")
     public ResponseEntity<Page<ListarItens>> listarItens(@PageableDefault(size = 12)Pageable pageable){

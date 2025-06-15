@@ -28,6 +28,16 @@ public class ListarPedidos {
         this.itens = itens;
     }
 
+    public ListarPedidos(Long id, Long funcionarioId, String funcionarioNome,
+                         String clienteNome, ItensDtoReturn itens) {
+        this.idPedido = id;
+        this.idFuncionario = funcionarioId;
+        this.nomeFuncionario = funcionarioNome;
+        this.nomeCliente = clienteNome;
+        this.itens = itens;
+    }
+
+
     public String getNomeFuncionario() {
         return nomeFuncionario;
     }

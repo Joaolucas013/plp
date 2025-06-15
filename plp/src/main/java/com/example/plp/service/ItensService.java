@@ -30,15 +30,14 @@ public class ItensService {
     private ProdutoRepository produtoRepository;
 
 
-    public ItensDoPedido cadastrar(Produto produto, Pedido pedido, int quantidade) {
+    public Itens cadastrar(Produto produto, Pedido pedido, int quantidade) {
         var item = new Itens();
         item.setPedido(pedido);
         item.setProdutos(produto);
         item.setQuantidade(quantidade);
         repository.save(item);
 
-        return new ItensDoPedido(item.getIdItem(), item.getQuantidade(), item.getProdutos().getNome(),
-                item.getPedido().getId());
+        return item;
     }
 
     public Page<ListarItens> paginacao(Pageable pageable) {

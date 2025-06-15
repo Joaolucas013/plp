@@ -39,7 +39,7 @@ public class PedidoService {
 
 
 
-    public Pedido cadastrarPedido(@Valid PedidoItens itens) {
+    public ListarPedidos cadastrarPedido(@Valid PedidoItens itens) {
         var pedido = new Pedido();
 
         var func = funcionarioRepository.findById(itens.idFuncionario()).orElseThrow();
@@ -58,9 +58,12 @@ public class PedidoService {
         produtoRepository.save(produto);
         repository.save(pedido);
 
-        itensService.cadastrar(produto, pedido, itens.quantidade());
+       var itensSalvos =  itensService.cadastrar(produto, pedido, itens.quantidade());
+       var itemDto = new ItensDtoReturn(itensSalvos.getQuantidade(), itensSalvos.getProdutos().getNome(),
+               itensSalvos.getProdutos().getDescricao(), itensSalvos.getProdutos().getPreco());
 
-        return pedido;
+       return new ListarPedidos(pedido.getId(), func.getId(), func.getNome(), cliente.getNome(),
+               itemDto);
     }
 
     public Page<ListarPedidos> listarPedidos(Pageable pageable) {
