@@ -2,12 +2,11 @@ package com.example.plp.service;
 
 
 import com.example.plp.dto.itensDto.ItensDtoReturn;
-import com.example.plp.dto.itensDto.PostItem;
+import com.example.plp.dto.pedido.PedidoItens;
 import com.example.plp.dto.pedido.ListarPedidos;
+import com.example.plp.model.Itens;
 import com.example.plp.model.Pedido;
-import com.example.plp.repository.ClienteRepository;
-import com.example.plp.repository.FuncionarioRepository;
-import com.example.plp.repository.PedidoRepository;
+import com.example.plp.repository.*;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -29,15 +28,38 @@ public class PedidoService {
     @Autowired
     private FuncionarioRepository funcionarioRepository;
 
+    @Autowired
+    private ProdutoRepository produtoRepository;
 
-    public Pedido cadastrarPedido(@Valid PostItem itens) {
+    @Autowired
+    private ItensRepository itensRepository;
+
+    @Autowired
+    private ItensService itensService;
+
+
+
+    public Pedido cadastrarPedido(@Valid PedidoItens itens) {
         var pedido = new Pedido();
 
-        var func =  funcionarioRepository.findById(itens.idFuncionario()).orElseThrow();
+        var func = funcionarioRepository.findById(itens.idFuncionario()).orElseThrow();
         var cliente = clienteRepository.findById(itens.idCliente()).orElseThrow();
+        var produto = produtoRepository.findById(itens.produtoId()).get();
+
+        if (produto.getQuantidade() - itens.quantidade() < 0) {
+            throw new RuntimeException("Não há " + itens.quantidade() + " produtos  disponíveis!!!" + " apenas: " +
+                    produto.getQuantidade());
+        }
+
+        produto.setQuantidade(produto.getQuantidade() - itens.quantidade());
         pedido.setCliente(cliente);
         pedido.setFuncionario(func);
         pedido.setHoraPedido(LocalDateTime.now());
+        produtoRepository.save(produto);
+        repository.save(pedido);
+
+        itensService.cadastrar(produto, pedido, itens.quantidade());
+
         return pedido;
     }
 

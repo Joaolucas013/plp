@@ -54,11 +54,6 @@ public class FuncionarioService {
                 funcionario.getDataAdmissao(), funcionario.getSalario());
     }
 
-//    Long id,
-//        String nome,
-//        String cpf,
-//        LocalDate dataAdmissao,
-//        double salario
     public void delete(Long id) {
         Optional<Funcionario> funExist = funcionarioRepository.findById(id);
 

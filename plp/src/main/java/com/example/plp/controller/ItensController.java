@@ -3,7 +3,7 @@ package com.example.plp.controller;
 
 import com.example.plp.dto.itensDto.ItensDoPedido;
 import com.example.plp.dto.itensDto.ListarItens;
-import com.example.plp.dto.itensDto.PostItem;
+import com.example.plp.dto.pedido.PedidoItens;
 import com.example.plp.service.ItensService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,7 +21,7 @@ public class ItensController {
     private ItensService service;
 
     @PostMapping("post")
-    public ResponseEntity<ItensDoPedido> cadastrarPedido(@Valid @RequestBody PostItem itens){
+    public ResponseEntity<ItensDoPedido> cadastrarPedido(@Valid @RequestBody PedidoItens itens){
         var item = service.cadastrar(itens);
         return ResponseEntity.ok(item);
     }
