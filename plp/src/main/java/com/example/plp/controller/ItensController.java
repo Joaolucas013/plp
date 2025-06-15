@@ -21,6 +21,7 @@ public class ItensController {
     private ItensService service;
 
 
+
     @GetMapping("/listar")
     public ResponseEntity<Page<ListarItens>> listarItens(@PageableDefault(size = 12)Pageable pageable){
         var itens = service.paginacao(pageable);
