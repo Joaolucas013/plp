@@ -5,7 +5,6 @@ import com.example.plp.dto.prod.*;
 import com.example.plp.service.ProdutoService;
 import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
-import jakarta.websocket.OnMessage;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -32,7 +31,7 @@ public class ProdutoController{
     }
 
     @GetMapping("/read")
-    public ResponseEntity<Page<ListarProduto>> listar(@PageableDefault(sort = {"nome"}, size = 15) Pageable pageable){
+    public ResponseEntity<Page<ListarProduto>> listar(@PageableDefault(sort = {"idProduto"}, size = 15) Pageable pageable){
         var page = produtoService.paginacao(pageable);
 
         return ResponseEntity.ok(page);
@@ -45,9 +44,9 @@ public class ProdutoController{
         return ResponseEntity.noContent().build();
     }
 
-    @GetMapping("/clube")
-    public ResponseEntity<List<ListarClube>> buscarProdutoPorClube(@RequestBody @Valid ProdutoEspecifico  dto){
-        var club = produtoService.buscar(dto);
+    @GetMapping("/produto")
+    public ResponseEntity<List<ListarClube>> buscarProdutoEspecifico(@RequestBody @Valid ProdutoEspecifico  produtoEspecifico){
+        var club = produtoService.buscar(produtoEspecifico);
         return ResponseEntity.ok(club);
     }
 

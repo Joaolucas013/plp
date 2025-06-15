@@ -11,4 +11,14 @@ public record ItensDtoReturn(
         this(listarItens.getProdutos().getQuantidade(), listarItens.getProdutos().getNome(),
                 listarItens.getProdutos().getDescricao(), listarItens.getProdutos().getPreco());
     }
+
+    @Override
+    public String toString() {
+        return "ItensDtoReturn{" +
+                "quantidade=" + quantidade +
+                ", nome='" + nome + '\'' +
+                ", descricao='" + descricao + '\'' +
+                ", preco=" + preco +
+                '}';
+    }
 }

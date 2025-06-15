@@ -20,15 +20,6 @@ public class ItensService {
     @Autowired
     private ItensRepository repository;
 
-    @Autowired
-    private PedidoRepository pedidoRepository;
-
-    @Autowired
-    private PedidoService pedidoService;
-
-    @Autowired
-    private ProdutoRepository produtoRepository;
-
 
     public Itens cadastrar(Produto produto, Pedido pedido, int quantidade) {
         var item = new Itens();

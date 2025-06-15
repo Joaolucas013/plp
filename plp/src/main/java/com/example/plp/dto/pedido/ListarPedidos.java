@@ -6,7 +6,6 @@ import lombok.NoArgsConstructor;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Component
 @NoArgsConstructor
@@ -16,7 +15,7 @@ public class ListarPedidos {
     private Long idFuncionario;
     private String nomeFuncionario;
     private String nomeCliente;
-    private List<ItensDtoReturn> itens;
+    private List<ItensDtoReturn> itensDtoReturnList;
 
 
     public ListarPedidos(Long id, Long funcionarioId, String funcionarioNome,
@@ -25,18 +24,16 @@ public class ListarPedidos {
         this.idFuncionario = funcionarioId;
         this.nomeFuncionario = funcionarioNome;
         this.nomeCliente = clienteNome;
-        this.itens = itens;
+        this.itensDtoReturnList = itens;
     }
 
-    public ListarPedidos(Long id, Long funcionarioId, String funcionarioNome,
-                         String clienteNome, ItensDtoReturn itens) {
-        this.idPedido = id;
-        this.idFuncionario = funcionarioId;
-        this.nomeFuncionario = funcionarioNome;
-        this.nomeCliente = clienteNome;
-        this.itens = itens;
+    public List<ItensDtoReturn> getItensDtoReturnList() {
+        return itensDtoReturnList;
     }
 
+    public void setItensDtoReturnList(List<ItensDtoReturn> itensDtoReturnList) {
+        this.itensDtoReturnList = itensDtoReturnList;
+    }
 
     public String getNomeFuncionario() {
         return nomeFuncionario;
@@ -71,10 +68,10 @@ public class ListarPedidos {
     }
 
     public List<ItensDtoReturn> getItens() {
-        return itens;
+        return itensDtoReturnList;
     }
 
     public void setItens(List<ItensDtoReturn> itens) {
-        this.itens = itens;
+        this.itensDtoReturnList = itens;
     }
 }

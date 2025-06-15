@@ -2,7 +2,6 @@ package com.example.plp.service;
 
 
 import com.example.plp.dto.Mensagem;
-import com.example.plp.dto.pedido.ListarPedidos;
 import com.example.plp.dto.prod.*;
 import com.example.plp.model.Produto;
 import com.example.plp.repository.ProdutoRepository;
@@ -53,7 +52,7 @@ public class ProdutoService {
     public List<ListarClube> buscar(@Valid ProdutoEspecifico dto) {
         var produto = new Produto();
 
-        List<Produto> time = repository.buscarPorClube(dto.clube());
+        List<Produto> time = repository.buscarPorClube(dto.produto());
 
         System.out.println(produto.getPreco());
       return   time.stream().map(t -> new ListarClube(t.getNome(), t.getDescricao(),
@@ -67,7 +66,7 @@ public class ProdutoService {
     public  List<ListarClube>  descontoEmProduto(@Valid ProdutoEspecifico dto) {
            Double taxa = 0.1;
 
-            List<Produto> time = repository.buscarPorClube(dto.clube());
+            List<Produto> time = repository.buscarPorClube(dto.produto());
             List<ListarClube> clubeList  = new ArrayList<>();
 
             for (Produto p : time) {

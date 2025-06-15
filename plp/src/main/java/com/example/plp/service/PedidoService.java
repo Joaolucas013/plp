@@ -4,6 +4,7 @@ package com.example.plp.service;
 import com.example.plp.dto.itensDto.ItensDtoReturn;
 import com.example.plp.dto.pedido.PedidoItens;
 import com.example.plp.dto.pedido.ListarPedidos;
+import com.example.plp.dto.pedido.PedidosReturn;
 import com.example.plp.model.Itens;
 import com.example.plp.model.Pedido;
 import com.example.plp.repository.*;
@@ -39,7 +40,7 @@ public class PedidoService {
 
 
 
-    public ListarPedidos cadastrarPedido(@Valid PedidoItens itens) {
+    public PedidosReturn cadastrarPedido(@Valid PedidoItens itens) {
         var pedido = new Pedido();
 
         var func = funcionarioRepository.findById(itens.idFuncionario()).orElseThrow();
@@ -58,13 +59,16 @@ public class PedidoService {
         produtoRepository.save(produto);
         repository.save(pedido);
 
-       var itensSalvos =  itensService.cadastrar(produto, pedido, itens.quantidade());
-       var itemDto = new ItensDtoReturn(itensSalvos.getQuantidade(), itensSalvos.getProdutos().getNome(),
-               itensSalvos.getProdutos().getDescricao(), itensSalvos.getProdutos().getPreco());
+        var itensSalvos = itensService.cadastrar(produto, pedido, itens.quantidade());
+        var itemDto = new ItensDtoReturn(itensSalvos.getQuantidade(), itensSalvos.getProdutos().getNome(),
+                itensSalvos.getProdutos().getDescricao(), itensSalvos.getProdutos().getPreco());
 
-       return new ListarPedidos(pedido.getId(), func.getId(), func.getNome(), cliente.getNome(),
-               itemDto);
+
+        return new PedidosReturn(pedido.getId(), func.getId(), func.getNome(), cliente.getNome(),
+                itemDto.quantidade(), itemDto.nome(), itemDto.preco());
     }
+
+
 
     public Page<ListarPedidos> listarPedidos(Pageable pageable) {
         return repository.findAll(pageable).map(p -> new ListarPedidos(

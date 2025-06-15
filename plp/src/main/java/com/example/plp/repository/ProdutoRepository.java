@@ -10,8 +10,8 @@ import java.util.List;
 public interface ProdutoRepository extends JpaRepository<Produto, Long> {
 
 
-    @Query("SELECT p FROM Produto p where p.nome LIKE %:clube%")
-    List<Produto> buscarPorClube(@Param("clube") String clube);
+    @Query("SELECT p FROM Produto p where p.nome LIKE %:produto%")
+    List<Produto> buscarPorClube(@Param("produto") String produto);
 }
 
 

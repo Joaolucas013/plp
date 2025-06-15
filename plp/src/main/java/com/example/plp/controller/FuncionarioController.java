@@ -28,7 +28,7 @@ public class FuncionarioController {
     }
 
     @GetMapping("read")
-    public ResponseEntity<Page<ListarFuncionario>> listar(@PageableDefault(size = 5, sort = {"nome"}) Pageable pageable) {
+    public ResponseEntity<Page<ListarFuncionario>> listar(@PageableDefault(size = 5, sort = {"id"}) Pageable pageable) {
         var page = funcionarioService.listarFuncionariosAtuais(pageable);
         return ResponseEntity.ok(page);
 
