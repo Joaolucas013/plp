@@ -35,7 +35,7 @@ public class Pedido {
     private LocalDateTime horaPedido;
 
 
-    @OneToMany(mappedBy = "pedido")
+    @OneToMany(mappedBy = "pedido", cascade = CascadeType.REMOVE)
     private List<Itens> itens = new ArrayList<>();
 
     public Pedido(Funcionario funcionario, List<Itens> itens, Cliente cliente, LocalDateTime dataVenda){

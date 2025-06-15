@@ -90,4 +90,8 @@ public class PedidoService {
     public DadosCompras clienteFiel() {
         return repository.dados();
     }
+
+    public void deletar(Long idPedido) {
+        repository.deleteById(idPedido);
+    }
 }

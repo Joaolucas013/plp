@@ -1,6 +1,8 @@
 package com.example.plp.dto.itensDto;
 
 import com.example.plp.model.Itens;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 
 public record ItensDtoReturn(
         int quantidade, String nome, String descricao, Double preco

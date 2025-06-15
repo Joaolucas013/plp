@@ -2,6 +2,7 @@ package com.example.plp.dto.pedido;
 
 import com.example.plp.dto.itensDto.ItensDtoReturn;
 import com.example.plp.model.Itens;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.NoArgsConstructor;
 import org.springframework.stereotype.Component;
 
@@ -15,6 +16,8 @@ public class ListarPedidos {
     private Long idFuncionario;
     private String nomeFuncionario;
     private String nomeCliente;
+
+   @JsonProperty("itens_do_Pedido")
     private List<ItensDtoReturn> itensDtoReturnList;
 
 

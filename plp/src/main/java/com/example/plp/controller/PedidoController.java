@@ -36,11 +36,18 @@ public class PedidoController {
         return ResponseEntity.ok(page);
     }
 
-    @GetMapping("cliente_fiel")
+    @GetMapping("/cliente_fiel")
     public ResponseEntity<DadosCompras> dados(){
         var cliente = pedidoService.clienteFiel();
 
         return ResponseEntity.ok(cliente);
+    }
+
+    @DeleteMapping("/delete/{idPedido}")
+    @Transactional
+    public ResponseEntity deletar (@PathVariable Long idPedido){
+         pedidoService.deletar(idPedido);
+        return ResponseEntity.noContent().build();
     }
 
 }
