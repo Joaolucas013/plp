@@ -35,6 +35,8 @@ public class FuncionarioController {
 
     }
 
+
+    @PutMapping("/update")
     public ResponseEntity<ListarFuncionario> update(@RequestBody @Valid UpdateFuncionario dto){
         var up = funcionarioService.update(dto);
         return ResponseEntity.ok(up);
