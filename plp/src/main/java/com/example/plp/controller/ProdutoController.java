@@ -59,10 +59,11 @@ public class ProdutoController{
 
     @GetMapping("/total_estoque")
     public ResponseEntity<List<Mensagem>> estoque(){
-        List<Mensagem> mensagems = produtoService.total();
-        return ResponseEntity.ok(mensagems);
+        List<Mensagem> mensagens = produtoService.total();
+        return ResponseEntity.ok(mensagens);
     }
 
+  //  public ResponseEntity
 
 
 }

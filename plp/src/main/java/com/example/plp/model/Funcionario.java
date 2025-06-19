@@ -5,7 +5,9 @@ import com.example.plp.dto.func.UpdateFuncionario;
 import jakarta.persistence.*;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -14,6 +16,8 @@ import java.util.List;
 @Table( name = "funcionarios")
 @AllArgsConstructor
 @NoArgsConstructor
+@Getter
+@Setter
 public class Funcionario {
 
 
@@ -35,68 +39,9 @@ public class Funcionario {
     @Column
     private boolean ativo;
 
-
-
     @OneToMany(mappedBy = "funcionario")
     private List<Pedido> pedido;
 
-
-    public List<Pedido> getPedido() {
-        return pedido;
-    }
-
-    public void setPedido(List<Pedido> pedido) {
-        this.pedido = pedido;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getNome() {
-        return nome;
-    }
-
-    public void setNome(String nome) {
-        this.nome = nome;
-    }
-
-    public String getCpf() {
-        return cpf;
-    }
-
-    public void setCpf(String cpf) {
-        this.cpf = cpf;
-    }
-
-
-    public LocalDate getDataAdmissao() {
-        return dataAdmissao;
-    }
-
-    public void setDataAdmissao(LocalDate dataAdmissao) {
-        this.dataAdmissao = dataAdmissao;
-    }
-
-    public LocalDate getDataDemissao() {
-        return dataDemissao;
-    }
-
-    public void setDataDemissao(LocalDate dataDemissao) {
-        this.dataDemissao = dataDemissao;
-    }
-
-    public double getSalario() {
-        return salario;
-    }
-
-    public void setSalario(double salario) {
-        this.salario = salario;
-    }
 
     public Funcionario update(@Valid UpdateFuncionario dto) {
         var funcionario = new Funcionario();
@@ -115,11 +60,5 @@ public class Funcionario {
         return  funcionario;
     }
 
-    public boolean isAtivo() {
-        return ativo;
-    }
 
-    public void setAtivo(boolean ativo) {
-        this.ativo = ativo;
-    }
 }
