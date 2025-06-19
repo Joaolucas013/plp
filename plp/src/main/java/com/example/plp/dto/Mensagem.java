@@ -6,8 +6,6 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 
-
-
 public class Mensagem {
    private String mensagem;
    TotalProdutos totalProdutos;

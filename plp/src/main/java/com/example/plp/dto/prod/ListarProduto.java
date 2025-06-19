@@ -7,13 +7,8 @@ import jakarta.validation.constraints.Positive;
 public record ListarProduto(
         String nome,
         Long idProduto,
-        @NotNull
         String descricao,
-
-        @Positive
         int quantidade,
-
-        @Positive
         Double preco
 ) {
     public ListarProduto(Produto produto){

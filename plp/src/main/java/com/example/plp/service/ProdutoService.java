@@ -98,4 +98,30 @@ public class ProdutoService {
         return totalProdutos;
 
     }
+
+    public ProdutoDto atualizar( ListarProduto atualizar) {
+        var produto = repository.findById(atualizar.idProduto());
+
+        if(!produto.isPresent()){
+            throw new RuntimeException("Produto não encontrado!!!");
+        }
+        if(atualizar.nome()!=null){
+            produto.get().setNome(atualizar.nome());
+        }
+        if(atualizar.quantidade()!=0){
+            produto.get().setQuantidade(atualizar.quantidade());
+        }
+
+        if (atualizar.preco() != null && atualizar.preco() != 0) {
+            produto.get().setPreco(atualizar.preco());
+        }
+
+        if(atualizar.descricao()!=null){
+            produto.get().setDescricao(atualizar.descricao());
+        }
+        repository.save(produto.get());
+
+        return new ProdutoDto(produto.get().getIdProduto(), produto.get().getNome(), produto.get().getDescricao(),
+                produto.get().getQuantidade(), produto.get().getPreco());
+    }
 }

@@ -63,7 +63,12 @@ public class ProdutoController{
         return ResponseEntity.ok(mensagens);
     }
 
-  //  public ResponseEntity
+    @GetMapping("/update")
+  public ResponseEntity<ProdutoDto> up(@RequestBody @Valid ListarProduto atualizar){
+        var prodAtualizado = produtoService.atualizar(atualizar);
+
+        return ResponseEntity.ok(prodAtualizado);
+  }
 
 
 }
