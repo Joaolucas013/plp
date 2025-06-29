@@ -118,18 +118,17 @@ public class ProdutoService {
         if(atualizar.descricao()!=null){
             produto.get().setDescricao(atualizar.descricao());
         }
-        repository.save(produto.get());
 
+        repository.save(produto.get());
         return new ProdutoDto(produto.get().getIdProduto(), produto.get().getNome(), produto.get().getDescricao(),
                 produto.get().getQuantidade(), produto.get().getPreco());
     }
 
     public Page<BaixoEstoque> listar(Pageable pageable) {
-        String msg = "Produtos com baixa quantidade de estoque!";
+        String msg = "Produto com baixa quantidade em estoque!";
         return repository.baixoEstoque(pageable)
-                .map(p -> new BaixoEstoque(msg,
-                        new ListarProduto(p.getNome(), p.getIdProduto(), p.getDescricao(),
-                                p.getQuantidade(), p.getPreco())));
+                .map(p -> new BaixoEstoque(msg, p.getNome(), p.getIdProduto(), p.getQuantidade()));
+
 
     }
 }

@@ -71,7 +71,7 @@ public class ProdutoController{
     }
 
     @GetMapping("/baixo_estoque")
-    public ResponseEntity<Page<BaixoEstoque>> baixoEstoque(@PageableDefault(size = 10, sort = {"idProduto"}) Pageable pageable) {
+    public ResponseEntity<Page<BaixoEstoque>> baixoEstoque(@PageableDefault(size = 10) Pageable pageable) {
         var page = produtoService.listar(pageable);
         return ResponseEntity.ok(page);
     }
