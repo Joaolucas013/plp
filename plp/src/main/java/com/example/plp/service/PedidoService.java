@@ -23,8 +23,11 @@ public class PedidoService {
     @Autowired
     private PedidoRepository repository;
 
-    @Autowired
-    private ClienteRepository clienteRepository;
+    private final ClienteRepository clienteRepository;
+
+    public PedidoService(ClienteRepository clienteRepository){
+        this.clienteRepository = clienteRepository;
+    }
 
     @Autowired
     private FuncionarioRepository funcionarioRepository;

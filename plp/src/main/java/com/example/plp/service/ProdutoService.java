@@ -54,15 +54,15 @@ public class ProdutoService {
 
         List<Produto> time = repository.buscarPorClube(dto.produto());
 
-        System.out.println(produto.getPreco());
-      return   time.stream().map(t -> new ListarClube(t.getNome(), t.getDescricao(),
+
+      return time.stream()
+                .map(t -> new ListarClube(t.getNome(), t.getDescricao(),
                 t.getQuantidade(), t.getPreco()))
                .collect(Collectors.toList());
 
     }
 
 
-    //metodo a ser falado em video
     public  List<ListarClube>  descontoEmProduto(@Valid ProdutoEspecifico dto) {
            Double taxa = 0.1;
 
@@ -81,7 +81,6 @@ public class ProdutoService {
     }
 
 
-    // metodo a ser falado em video
     public List<Mensagem> total() {
         String msg = "valor total do produto  em estoque";
         Double total = 0.0;
@@ -124,4 +123,14 @@ public class ProdutoService {
         return new ProdutoDto(produto.get().getIdProduto(), produto.get().getNome(), produto.get().getDescricao(),
                 produto.get().getQuantidade(), produto.get().getPreco());
     }
+
+    public Page<BaixoEstoque> listar(Pageable pageable) {
+        String msg = "Produtos com baixa quantidade de estoque!";
+        return repository.baixoEstoque(pageable)
+                .map(p -> new BaixoEstoque(msg,
+                        new ListarProduto(p.getNome(), p.getIdProduto(), p.getDescricao(),
+                                p.getQuantidade(), p.getPreco())));
+
+    }
 }
+
