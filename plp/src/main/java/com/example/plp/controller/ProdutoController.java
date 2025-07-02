@@ -50,7 +50,7 @@ public class ProdutoController{
     }
 
 
-    @GetMapping("/clube_desconto")
+    @GetMapping("/desconto")
     public ResponseEntity<List<ListarClube>> descontoEmProduto(@RequestBody @Valid ProdutoEspecifico dto) {
         var club = produtoService.descontoEmProduto(dto);
         return ResponseEntity.ok(club);

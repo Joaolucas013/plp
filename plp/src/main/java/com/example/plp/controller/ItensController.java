@@ -23,7 +23,7 @@ public class ItensController {
 
 
     @GetMapping("/listar")
-    public ResponseEntity<Page<ListarItens>> listarItens(@PageableDefault(size = 12)Pageable pageable){
+    public ResponseEntity<Page<ListarItens>> listarItens(@PageableDefault(size = 12) Pageable pageable){
         var itens = service.paginacao(pageable);
         return ResponseEntity.ok(itens);
     }

@@ -74,10 +74,10 @@ public class ClienteService {
             Cliente cliente = clientExists.removeFirst();
             clientes.add(new UpdateCliente(cliente.getNome(), cliente.getCpf(), cliente.getId()));
         }
-        System.out.println(nome);
-        System.out.println(clientes);
+
         return clientes;
     }
+
 
 
 }

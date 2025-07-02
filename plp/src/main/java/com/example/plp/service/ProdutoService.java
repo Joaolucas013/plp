@@ -58,7 +58,8 @@ public class ProdutoService {
       return time.stream()
                 .map(t -> new ListarClube(t.getNome(), t.getDescricao(),
                 t.getQuantidade(), t.getPreco()))
-               .collect(Collectors.toList());
+               .collect(Collectors
+                       .toList());
 
     }
 

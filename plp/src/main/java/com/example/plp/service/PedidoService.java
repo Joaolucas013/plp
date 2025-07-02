@@ -85,10 +85,10 @@ public class PedidoService {
                                 i.getProdutos().getNome(),
                                 i.getProdutos().getDescricao(),
                                 i.getProdutos().getPreco()))
-                        .collect(Collectors.toList())
+                        .collect(Collectors
+                                .toList())
         ));
     }
-
 
     public DadosCompras clienteFiel() {
         return repository.dados();

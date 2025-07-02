@@ -25,7 +25,7 @@ public class Cliente {
     @Column(nullable = false)
     private String nome;
 
-    @Column(nullable = true, unique = true)
+    @Column(nullable = false, unique = true)
     private String cpf;
 
     @OneToMany(mappedBy = "cliente")
